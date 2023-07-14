@@ -1,0 +1,104 @@
+{% extends 'news/layout.html' %} {% load static %} {% block title %} Category4
+{% endblock %}
+
+<!-- Main content: Trending Category4-->
+{% block main_content %}
+<div class="col-12 col-md-6">
+	{% if trending_posts %}
+	<img class="thumb mb-3" src="{{ trending_posts.0.post.image.url }}" />
+	<h3>
+		<a
+			class="font-large"
+			href="{% url 'news:post_details' post_id=trending_posts.0.post.id %}"
+		>
+			{{ trending_posts.0.post.title }}
+		</a>
+	</h3>
+	{% endif %}
+</div>
+
+<div class="col-12 col-md-6">
+	<div class="row">
+		{% for post in trending_posts %}
+		<div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+			<div class="image image-sm mb-1">
+				<img class="thumb" src="{{ post.post.image.url }}" />
+			</div>
+			<h3 class="mb-4">
+				<a href="{% url 'news:post_details' post_id=post.post.id %}">
+					{{ post.post.title }}
+				</a>
+			</h3>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
+
+<!-- Latest Updates: Category4-->
+{% block content_latest_updates_title %}
+<span>Latest Updates</span>
+{% endblock %} {% block content_latest_updates %} {% for post in page_obj %}
+<div class="row mb-3 bb-1 pt-0">
+	<div class="col-4">
+		<img class="thumb" src="{{ post.post.image.url }}" />
+	</div>
+	<div class="col-8">
+		<h5>
+			<a href="{% url 'news:post_details' post_id=post.post.id %}">
+				{{ post.post.title }}
+			</a>
+		</h5>
+		<small>{{ post.time_posted|date:"d F, Y" }}</small>
+		<p class="summary pt-3">{{ post.post.introduction }}</p>
+	</div>
+</div>
+{% endfor %}
+
+<nav aria-label="Page navigation example">
+	<ul class="pagination">
+		{% if page_obj.has_previous %}
+		<li class="page-item">
+			<a class="page-link" href="?page=1">&laquo; first</a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="?page={{ page_obj.previous_page_number }}"
+				>previous</a
+			>
+		</li>
+		{% endif %}
+
+		<li class="page-item">
+			<span class="current-page page-link">{{ page_obj.number }}</span>
+		</li>
+
+		{% if page_obj.has_next %}
+		<li class="page-item">
+			<a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"
+				>last &raquo;</a
+			>
+		</li>
+		{% endif %}
+	</ul>
+</nav>
+
+{% endblock %}
+
+<!-- Trending: Category4-->
+{% block trending_title %}
+<span>Trending</span>
+{% endblock %} {% block trending %} {% for post in trending_posts %}
+<div class="row">
+	<div class="col-4">
+		<img class="thumb" src="{{ post.post.image.url }}" />
+	</div>
+	<div class="col-8">
+		<a href="{% url 'news:post_details' post_id=post.post.id %}">
+			{{ post.post.title }}
+		</a>
+	</div>
+</div>
+{% endfor %} {% endblock %}

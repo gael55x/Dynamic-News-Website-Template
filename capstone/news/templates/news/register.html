@@ -1,0 +1,60 @@
+{% extends 'news/layout.html' %} {% load static %} {% block title %} News -
+Register{% endblock %} {% block authentication %}
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-header">
+					<h4 class="text-center">Register</h4>
+				</div>
+				<div class="card-body">
+					<form method="POST" action="{% url 'news:register' %}">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="username">Full Name</label>
+							<input
+								type="text"
+								class="form-control"
+								id="username"
+								name="username"
+								required
+							/>
+						</div>
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input
+								type="password"
+								class="form-control"
+								id="password"
+								name="password"
+								required
+							/>
+						</div>
+						<div class="form-group">
+							<label for="confirmation">Confirm Password</label>
+							<input
+								type="password"
+								class="form-control"
+								id="confirmation"
+								name="confirmation"
+								required
+							/>
+						</div>
+						<div class="form-group text-center">
+							<button type="submit" class="btn btn-primary">Register</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %} {% block trending_title %}
+<div class="login-link text-right mt-3">
+	<a href="{% url 'news:login' %}"
+		><i class="fas fa-arrow-right"></i> Already registered and approved?
+		Login</a
+	>
+</div>
+{% endblock %}

@@ -1,0 +1,146 @@
+{% extends 'news/layout.html' %} {% load static %}
+<!--profile details-->
+{% block title %} {{ user.username }} {% endblock %}
+
+<!-- Main content: User profile details -->
+{% block main_content %}
+<div
+	class="container main-news section d-flex justify-content-center align-items-center"
+>
+	<div class="content-box">
+		<h2 style="text-align: center">{{ user.username }}</h2>
+		<p>Date Joined: {{ date_joined }}</p>
+		<a href="{% url 'news:logout' %}" class="logout-link btn btn-primary"
+			>Logout</a
+		>
+	</div>
+</div>
+{% endblock %}
+
+<!-- Render draft posts of the Author (user) -->
+{% block content_latest_updates_title %}
+<span>Your Draft Posts</span>
+{% endblock %}
+
+<!-- User draft posts (pending approval) -->
+{% block content_latest_updates %} {% for draft_post in draft_posts %}
+<div class="row mb-3 bb-1 pt-0">
+	<div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+		<img class="thumb" src="{{ draft_post.image.url }}" />
+	</div>
+	<div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+		<h5>
+			<a href="{% url 'news:post_details' post_id=draft_post.id %}">
+				{{ draft_post.title }}
+			</a>
+		</h5>
+		<small>{{ draft_post.time_posted|date:"d F, Y" }}</small>
+		<p class="summary pt-3">{{ draft_post.introduction }}</p>
+		{% if draft_post.admin_evaluation %}
+		<p class="pending-approval">Pending Approval</p>
+		{% endif %}
+	</div>
+</div>
+{% empty %}
+<p>No draft posts available.</p>
+{% endfor %}
+
+<nav aria-label="Page navigation example">
+	<ul class="pagination">
+		{% if draft_posts.has_previous %}
+		<li class="page-item">
+			<a class="page-link" href="?draft_posts_page=1">&laquo; first</a>
+		</li>
+		<li class="page-item">
+			<a
+				class="page-link"
+				href="?draft_posts_page={{ draft_posts.previous_page_number }}"
+				>previous</a
+			>
+		</li>
+		{% endif %}
+
+		<li class="page-item">
+			<span class="current-page page-link">{{ draft_posts.number }}</span>
+		</li>
+
+		{% if draft_posts.has_next %}
+		<li class="page-item">
+			<a
+				class="page-link"
+				href="?draft_posts_page={{ draft_posts.next_page_number }}"
+				>next</a
+			>
+		</li>
+		<li class="page-item">
+			<a
+				class="page-link"
+				href="?draft_posts_page={{ draft_posts.paginator.num_pages }}"
+				>last &raquo;</a
+			>
+		</li>
+		{% endif %}
+	</ul>
+</nav>
+{% endblock %}
+
+<!-- Approved posts of user (author) -->
+{% block trending_title %}
+<span>Your Approved Posts</span>
+{% endblock %} {% block trending %} {% for approved_post in approved_posts %}
+<div class="row mb-3 bb-1 pt-0">
+	<div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+		<img class="thumb" src="{{ approved_post.image.url }}" />
+	</div>
+	<div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+		<h5>
+			<a href="{% url 'news:post_details' post_id=approved_post.id %}">
+				{{ approved_post.title }}
+			</a>
+		</h5>
+		<small>{{ approved_post.approvedpost.time_posted|date:"d F, Y" }}</small>
+		<p class="summary pt-3">{{ approved_post.introduction }}</p>
+	</div>
+</div>
+{% empty %}
+<p>No approved posts available.</p>
+{% endfor %}
+
+<nav aria-label="Page navigation example">
+	<ul class="pagination">
+		{% if approved_posts.has_previous %}
+		<li class="page-item">
+			<a class="page-link" href="?approved_posts_page=1">&laquo; first</a>
+		</li>
+		<li class="page-item">
+			<a
+				class="page-link"
+				href="?approved_posts_page={{ approved_posts.previous_page_number }}"
+				>previous</a
+			>
+		</li>
+		{% endif %}
+
+		<li class="page-item">
+			<span class="current-page page-link">{{ approved_posts.number }}</span>
+		</li>
+
+		{% if approved_posts.has_next %}
+		<li class="page-item">
+			<a
+				class="page-link"
+				href="?approved_posts_page={{ approved_posts.next_page_number }}"
+				>next</a
+			>
+		</li>
+		<li class="page-item">
+			<a
+				class="page-link"
+				href="?approved_posts_page={{ approved_posts.paginator.num_pages }}"
+				>last &raquo;</a
+			>
+		</li>
+		{% endif %}
+	</ul>
+</nav>
+{% endblock %}

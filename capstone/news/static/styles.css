@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap');
+
+a{
+	color: #cc6060;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #f7620c;
+}
+.logo-wrapper{
+	text-transform: uppercase;
+	padding: 30px 0px;
+}
+
+.menu{
+    position: relative;
+    z-index: 9999;
+	padding-left: 0px;
+	background: #ffa908fc;
+}
+.menu .container{
+	padding-left: 0px;
+}
+.menu-items .active{
+	background: #f7620c;
+}
+.menu .menu-items a{
+	text-decoration: none;
+	color: #fff;
+	padding: 10px 30px;
+	display: block;
+}
+.menu .menu-items a:hover{
+	background: #f7620c;
+}
+.thumb{
+	width: 100%;
+}
+.main-news{
+	margin-top: 20px;
+}
+.main-news h3{
+	line-height: 0.75;
+}
+.main-news h3 a{
+	font-size: 17px;
+	text-decoration: none;
+	font-weight: 600;
+}
+.image{
+	overflow: hidden;
+}
+.image-sm{
+	max-height: 180px;
+}
+.image-sm img{
+	height: 180px;
+}
+.image-xs{
+	max-height: 140px;
+}
+.image-xxs{
+	max-height: 100px;
+}
+.image img{
+	object-fit: cover;
+}
+.font-large{
+	font-size: 0.9em!important;
+	font-weight: 600!important;
+}
+.section-title{
+	position: relative;
+	margin-bottom: 20px;
+}
+.section-title span{
+	font-weight: 400;
+	font-size: 17px;
+	color: #519ac5fc;
+}
+.section-title span:after{
+	content: '';
+	position: absolute;
+	background: #519ac5fc;
+	width: 50px;
+	height: 2px;
+	left: 0;
+	bottom: 0;
+}
+.bb-1{
+	padding: 20px 0px;
+	border-bottom: 1px solid #eee;
+}
+.section{
+	border-bottom: 1px solid #eee;
+	padding-bottom: 20px;
+}
+small{
+	color: #999;
+}
+.summary{
+	color: #777;
+}
+.trending .row{
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #eee;
+}
+.sticky{
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+.no-pad{
+	padding-left: 0px!important;
+}
+
+/* create article route */
+.create_article{
+    padding-top: 2rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.d-block {
+    background: #ffa908fc !important;
+  }
+  
+  .d-block:hover {
+    background: #f7620c !important;
+  }
+
+/* Profile css */
+.content-box {
+    background-color: #fff;
+    padding: 20px;
+    width: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.logout-link {
+    background-color: #ffa908fc !important;
+}
+.logout-link:hover {
+    background-color: #f7620c !important;
+}
+/* login and register route */
+/* Center the card */
+.card {
+    margin-top: 50px;
+    z-index: 0;
+  }
+
+  /* Style the card header */
+  .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  /* Center the login form */
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Style the form inputs */
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  /* Style the submit button */
+  .form-group.text-center {
+    margin-top: 30px;
+  }
+
+  /* Add some spacing between the alert messages */
+  .alert-danger {
+    margin-bottom: 10px;
+  }
+
+  .logged-in-container {
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logged-in-as {
+    font-size: 16px;
+}
+
+.logout-link {
+    color: #333;
+    text-decoration: none;
+    padding: 5px 10px;
+    background-color: #ccc;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+.logout-link:hover {
+    background-color: #999;
+}

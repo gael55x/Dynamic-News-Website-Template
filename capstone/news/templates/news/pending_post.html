@@ -1,0 +1,26 @@
+{% extends 'news/layout.html' %} {% load static %} {% block title %}News - Post
+Pending Approval{% endblock %} {% block authentication %}
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-header">
+					<h4 class="text-center">Post Pending Approval</h4>
+				</div>
+				<div class="card-body">
+					<div id="message-container"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %} {% block content_latest_updates_title %}
+<a class="news-link" href="{% url 'news:index' %}"
+	><i class="fas fa-arrow-left"></i> Back to the News</a
+>
+{% endblock %} {% block extra_js %}
+<script
+	src="{% static 'js/pending_post.js' %}"
+	data-post-id="{{ post_id }}"
+></script>
+{% endblock %}
