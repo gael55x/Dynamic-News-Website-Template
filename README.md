@@ -24,8 +24,10 @@ The project's directory structure is as follows:
 - capstone/: The main app directory.
   - capstone/: Contains the settings and configuration files for the app to start.
     - settings.py: Configuration settings for the project.
-    - urls.py: URL routing for the app. - wsgi.py: WSGI application entry point.
-    - **init**.py: Initialization file. - asgi.py: ASGI application entry point.
+    - urls.py: URL routing for the app.
+    - wsgi.py: WSGI application entry point.
+    - **init**.py: Initialization file.
+    - asgi.py: ASGI application entry point.
   - media/: Contains media files for storage.
   - news/: Contains the news website application.
     - templates/: Contains HTML templates for rendering.
