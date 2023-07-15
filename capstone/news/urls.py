@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.decorators.http import require_POST
 from . import views
 
 app_name = 'news'
@@ -17,5 +18,8 @@ urlpatterns = [
     path('registration_check/', views.registration_check, name='registration_check'),
     path('register/', views.register, name='register'),
     path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
+    path('logout/', require_POST(views.logout_view), name='logout'),
+    path('delete_account/', require_POST(views.delete_account), name='delete_account'),
+    path('change_password/', require_POST(views.change_password), name='change_password'),
+
 ]

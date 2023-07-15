@@ -1,20 +1,162 @@
 {% extends 'news/layout.html' %} {% load static %}
 <!--profile details-->
-{% block title %} {{ user.username }} {% endblock %}
-
-<!-- Main content: User profile details -->
-{% block main_content %}
+{% block title %} {{ user.username }} {% endblock %} {% block main_content %}
 <div
 	class="container main-news section d-flex justify-content-center align-items-center"
 >
 	<div class="content-box">
 		<h2 style="text-align: center">{{ user.username }}</h2>
 		<p>Date Joined: {{ date_joined }}</p>
-		<a href="{% url 'news:logout' %}" class="logout-link btn btn-primary"
-			>Logout</a
+		<form id="logout-form" method="post" action="{% url 'news:logout' %}">
+			{% csrf_token %}
+			<button type="submit" class="logout-link btn btn-primary">Logout</button>
+		</form>
+		<button
+			id="delete-account-btn"
+			class="btn btn-danger"
+			data-toggle="modal"
+			data-target="#deleteAccountModal"
 		>
+			Delete Account
+		</button>
+		<button
+			id="change-password-btn"
+			class="btn btn-primary"
+			data-toggle="modal"
+			data-target="#changePasswordModal"
+		>
+			Change Password
+		</button>
 	</div>
 </div>
+
+<!-- Delete Account Modal -->
+<div
+	class="modal fade"
+	id="deleteAccountModal"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="deleteAccountModalLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="deleteAccountModalLabel">Delete Account</h5>
+				<button
+					type="button"
+					class="close"
+					data-dismiss="modal"
+					aria-label="Close"
+				>
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>Are you sure you want to delete your account?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">
+					Cancel
+				</button>
+				<form
+					id="delete-account-form"
+					method="post"
+					action="{% url 'news:delete_account' %}"
+				>
+					{% csrf_token %}
+					<button
+						id="confirm-delete-account-btn"
+						class="btn btn-danger"
+						type="submit"
+					>
+						Delete
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Change Password Modal -->
+<div
+	class="modal fade"
+	id="changePasswordModal"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="changePasswordModalLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="changePasswordModalLabel">
+					Change Password
+				</h5>
+				<button
+					type="button"
+					class="close"
+					data-dismiss="modal"
+					aria-label="Close"
+				>
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form
+					id="change-password-form"
+					method="post"
+					action="{% url 'news:change_password' %}"
+				>
+					{% csrf_token %}
+					<div class="form-group">
+						<label for="id_old_password">Old Password:</label>
+						<input
+							type="password"
+							id="id_old_password"
+							name="old_password"
+							class="form-control"
+							required
+						/>
+					</div>
+					<div class="form-group">
+						<label for="id_new_password1">New Password:</label>
+						<input
+							type="password"
+							id="id_new_password1"
+							name="new_password1"
+							class="form-control"
+							required
+						/>
+					</div>
+					<div class="form-group">
+						<label for="id_new_password2">Confirm New Password:</label>
+						<input
+							type="password"
+							id="id_new_password2"
+							name="new_password2"
+							class="form-control"
+							required
+						/>
+					</div>
+					<button
+						id="confirm-change-password-btn"
+						class="btn btn-primary"
+						type="submit"
+					>
+						Change Password
+					</button>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">
+					Cancel
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 {% endblock %}
 
 <!-- Render draft posts of the Author (user) -->
@@ -143,4 +285,4 @@
 		{% endif %}
 	</ul>
 </nav>
-{% endblock %}
+{% endblock %} {% block extra_js %} {% endblock %}

@@ -12,6 +12,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 		<link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	</head>
 
 	<body>
@@ -25,47 +27,52 @@
 				</h1>
 			</div>
 		</div>
-
-        <div class="container-fluid menu">
+        
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <div class="d-flex menu-items">
-                    <div class="active">
-                        <a href="{% url 'news:index' %}">News</a>
-                    </div>
-                    <div class="">
-                        <a href="{% url 'news:category1' %}">Category1</a>
-                    </div>
-                    <div class="">
-                        <a href="{% url 'news:category2' %}">Category2</a>
-                    </div>
-                    <div class="">
-                        <a href="{% url 'news:category3' %}">Category3</a>
-                    </div>
-                    <div class="">
-                        <a href="{% url 'news:category4' %}">Category4</a>
-                    </div>
-                    <div class="">
-                        <a href="{% url 'news:category5' %}">Category5</a>
-                    </div>
-                    {% if not user.is_authenticated %}
-                        <div class="">
-                            <a href="{% url 'news:login' %}">Journalist Login</a>
-                        </div>
-                        <div class="">
-                            <a href="{% url 'news:register' %}">Register</a>
-                        </div>
-                    {% endif %}
-                    {% if user.is_authenticated %}
-                        <div class="create-post">
-                            <a href="{% url 'news:create_post' %}">Create Article</a>
-                        </div>
-                        <div class="profile">
-                            <a href="{% url 'news:profile' %}">{{ user.username }}</a>
-                        </div>  
-                    {% endif %}
-                </div>
+              <a class="navbar-brand" href="{% url 'news:index' %}" style="color: #fff;">News</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'news:category1' %}">Category1</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'news:category2' %}">Category2</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'news:category3' %}">Category3</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'news:category4' %}">Category4</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'news:category5' %}">Category5</a>
+                  </li>
+                  {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'news:login' %}">Journalist Login</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'news:register' %}">Register</a>
+                    </li>
+                  {% endif %}
+                  {% if user.is_authenticated %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'news:create_post' %}">Create Article</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'news:profile' %}">{{ user.username }}</a>
+                    </li>
+                  {% endif %}
+                </ul>
+              </div>
             </div>
-        </div>
+          </nav>
+          
+          
         
             
             <!-- Login Container -->
@@ -122,7 +129,7 @@
 		</div>
 
         <script type="text/javascript" src="{% static 'js/layout.js' %}"></script>
-
+        <script src="{% static 'js/change_authentication.js' %}"></script>
     {% block extra_js %}
     {% endblock %}
 	</body>

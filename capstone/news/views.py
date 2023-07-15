@@ -8,10 +8,12 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 import re
 import markdown
-import json
 
 from .models import User, Post_Category, Post, ApprovedPost
 
@@ -441,8 +443,19 @@ def logout_view(request):
     return HttpResponseRedirect(reverse("news:index"))
 
 
+@require_POST
 def delete_account(request):
-    pass
+    request.user.delete()
+    logout(request)
+    return redirect('news:index')
 
+@require_POST
+@login_required
 def change_password(request):
-    pass
+    form = PasswordChangeForm(request.user, request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('news:index')
+    else:
+        errors = form.errors.as_json()
+        return JsonResponse({'errors': errors}, status=400)
